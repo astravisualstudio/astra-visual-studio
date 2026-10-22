@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astra Visual Studio | Produção Audiovisual & Design Criativo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            900: '#0B1513',
+                            800: '#11221F',
+                            700: '#1A332E',
+                            600: '#004C3C'
+                        },
+                        cyan: {
+                            300: '#9FC4A5',
+                            400: '#00AA86',
+                            500: '#00AA86'
+                        },
+                        blue: {
+                            400: '#9FC4A5',
+                            500: '#00AA86',
+                            600: '#004C3C'
+                        },
+                        purple: {
+                            400: '#FFCF7C',
+                            500: '#FFCF7C',
+                            600: '#B58A3F'
+                        },
+                        amber: {
+                            400: '#FFCF7C',
+                            500: '#B58A3F'
+                        },
+                        pink: {
+                            400: '#FFCF7C',
+                            500: '#B58A3F'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0B1513;
+            color: #F3F4F6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(17, 34, 31, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 170, 134, 0.15);
+        }
+        .glass-card {
+            background: rgba(26, 51, 46, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 170, 134, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(0, 170, 134, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(0, 170, 134, 0.2);
+            transform: translateY(-4px);
+        }
+        .glow-effect {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0,170,134,0.18) 0%, rgba(255,207,124,0.06) 50%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Custom Before/After Slider */
+        .img-comp-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .img-comp-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .img-comp-img img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-width: none;
+        }
+        .img-comp-slider {
+            position: absolute;
+            z-index: 9;
+            cursor: ew-resize;
+            width: 40px;
+            height: 40px;
+            background-color: #00AA86;
+            opacity: 0.95;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px rgba(0, 170, 134, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0B1513;
+            font-weight: bold;
+        }
+        .img-comp-slider::after {
+            content: '';
+            position: absolute;
+            top: -250px;
+            bottom: -250px;
+            width: 2px;
+            background: #00AA86;
+            z-index: -1;
+            box-shadow: 0 0 10px #00AA86;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B1513;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1A332E;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00AA86;
+        }
+    </style>
+</head>
+<body class="bg-dark-900 text-gray-100 antialiased selection:bg-cyan-500 selection:text-dark-900">
+
+    <!-- Background Ambient Glows -->
+    <div class="glow-effect top-0 left-1/4 -translate-x-1/2"></div>
+    <div class="glow-effect top-[40%] right-10"></div>
+    <div class="glow-effect bottom-20 left-10"></div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-32 opacity-0 transition-all duration-300 glass-panel px-6 py-4 rounded-xl shadow-2xl flex items-center space-x-3 border-cyan-500/30">
+        <div id="toast-icon" class="text-cyan-400 text-xl"><i class="fa-solid fa-circle-check"></i></div>
+        <div>
+            <h4 id="toast-title" class="font-bold text-sm text-white">Sucesso!</h4>
+            <p id="toast-msg" class="text-xs text-gray-300">Mensagem enviada com sucesso.</p>
+        </div>
+    </div>
+
+    <!-- Header / Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-40 glass-panel border-b border-white/5 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#inicio" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-dark-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform duration-300 border border-cyan-500/30 p-1.5">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <path d="M50 12 L88 84 H68 L50 48 L32 84 H12 Z" fill="#00AA86"/>
+                        <path d="M50 32 L54 46 L68 50 L54 54 L50 68 L46 54 L32 50 L46 46 Z" fill="#FFCF7C"/>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display font-extrabold text-lg tracking-wider text-white">ASTRA</span>
+                    <span class="text-[10px] uppercase tracking-widest text-cyan-400 font-semibold -mt-1">Visual Studio</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#inicio" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors">Início</a>
+                <a href="#portfolio" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors">Portfólio</a>
+                <a href="#servicos" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors">Serviços</a>
+                <a href="#sobre" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors">Sobre</a>
+                <a href="#instagram" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors">Instagram</a>
+                <a href="#contato" class="text-sm font-medium text-gray-300 hover:text-cyan-400 transition-colors">Contato</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button onclick="openBudgetModal()" class="relative group overflow-hidden rounded-xl p-[1px] focus:outline-none">
+                    <span class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl transition-all duration-300 group-hover:opacity-90"></span>
+                    <span class="relative px-5 py-2.5 rounded-xl bg-dark-800 text-white font-medium text-sm flex items-center space-x-2 transition-colors group-hover:bg-opacity-0">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                    </span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="menu-btn" class="md:hidden text-gray-300 hover:text-white p-2 focus:outline-none" onclick="toggleMobileMenu()">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-white/5 px-6 py-6 space-y-4">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block text-base font-medium text-gray-200 hover:text-cyan-400">Início</a>
+            <a href="#portfolio" onclick="toggleMobileMenu()" class="block text-base font-medium text-gray-200 hover:text-cyan-400">Portfólio</a>
+            <a href="#servicos" onclick="toggleMobileMenu()" class="block text-base font-medium text-gray-200 hover:text-cyan-400">Serviços</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="block text-base font-medium text-gray-200 hover:text-cyan-400">Sobre</a>
+            <a href="#instagram" onclick="toggleMobileMenu()" class="block text-base font-medium text-gray-200 hover:text-cyan-400">Instagram</a>
+            <a href="#contato" onclick="toggleMobileMenu()" class="block text-base font-medium text-gray-200 hover:text-cyan-400">Contato</a>
+            <div class="pt-2">
+                <button onclick="toggleMobileMenu(); openBudgetModal();" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-medium text-center shadow-lg shadow-cyan-500/25">
+                    Solicitar Orçamento
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center pt-28 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <!-- Left Text Content -->
+            <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    <span>Agência Criativa & Audiovisual</span>
+                </div>
+                
+                <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.1] text-white">
+                    Produção audiovisual, edição e design criativo para <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400">marcas autênticas</span>.
+                </h1>
+
+                <p class="text-gray-400 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                    Ajudamos empresas, marcas e pessoas a se destacarem no digital através de comunicação visual marcante, roteiros cativantes e edições cinematográficas.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-center shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center space-x-3">
+                        <span>Explorar Projetos</span>
+                        <i class="fa-solid fa-compass text-sm"></i>
+                    </a>
+                    <button onclick="openBudgetModal()" class="w-full sm:w-auto px-8 py-4 rounded-xl glass-card text-gray-200 font-semibold text-center hover:bg-dark-700 hover:text-white transition-all duration-300 flex items-center justify-center space-x-3">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-paper-plane text-xs"></i>
+                    </button>
+                </div>
+
+                <!-- Stats / Trust Indicators -->
+                <div class="grid grid-cols-3 gap-6 pt-8 border-t border-white/5 max-w-lg mx-auto lg:mx-0">
+                    <div>
+                        <div class="font-display font-bold text-2xl sm:text-3xl text-white">100%</div>
+                        <div class="text-xs text-gray-400 mt-1">Dedicados ao Detalhe</div>
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-2xl sm:text-3xl text-cyan-400">4K+</div>
+                        <div class="text-xs text-gray-400 mt-1">Qualidade Cinematográfica</div>
+                    </div>
+                    <div>
+                        <div class="font-display font-bold text-2xl sm:text-3xl text-purple-400">360°</div>
+                        <div class="text-xs text-gray-400 mt-1">Soluções Visuais</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Visual Montage Card -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative mx-auto max-w-md lg:max-w-none">
+                    <!-- Glow behind card -->
+                    <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 opacity-30 blur-xl"></div>
+                    
+                    <div class="relative glass-panel p-4 rounded-2xl shadow-2xl space-y-4">
+                        <div class="relative h-72 sm:h-80 rounded-xl overflow-hidden group">
+                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="Produção Audiovisual" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-dark-900/20 to-transparent flex flex-col justify-end p-6">
+                                <span class="px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-400 text-xs font-semibold w-max mb-2">Showreel 2026</span>
+                                <h3 class="font-display font-bold text-xl text-white">Astra Visual Studio em Ação</h3>
+                                <p class="text-xs text-gray-300 mt-1">Captação, direção e tratamento de cor premium.</p>
+                            </div>
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-dark-900/70 backdrop-blur-md flex items-center justify-center text-cyan-400 cursor-pointer hover:bg-cyan-500 hover:text-dark-900 transition-colors" onclick="openVideoModal('Showreel Principal')">
+                                <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                            </div>
+                        </div>
+
+                        <!-- Mini cards grid -->
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="glass-card p-3 rounded-xl flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+                                    <i class="fa-solid fa-video"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-white">Audiovisual</div>
+                                    <div class="text-[10px] text-gray-400">Captação 4K</div>
+                                </div>
+                            </div>
+                            <div class="glass-card p-3 rounded-xl flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400">
+                                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-bold text-white">Color Grading</div>
+                                    <div class="text-[10px] text-gray-400">Cinematic Look</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio / Trabalhos Selecionados -->
+    <section id="portfolio" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-cyan-400 text-xs font-semibold tracking-widest uppercase">Trabalhos Selecionados</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">Nossa Galeria de Projetos</h2>
+                <p class="text-gray-400 text-sm sm:text-base">Explore nossa produção audiovisual, edições dinâmicas, identidades visuais e momentos inesquecíveis.</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+                <button onclick="filterPortfolio('all')" class="portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 bg-cyan-500 text-dark-900 font-semibold shadow-lg shadow-cyan-500/20" data-filter="all">Todos</button>
+                <button onclick="filterPortfolio('audiovisual')" class="portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 glass-card text-gray-300 hover:text-white" data-filter="audiovisual">Produção Audiovisual</button>
+                <button onclick="filterPortfolio('edicao')" class="portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 glass-card text-gray-300 hover:text-white" data-filter="edicao">Edição de Vídeos</button>
+                <button onclick="filterPortfolio('reels')" class="portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 glass-card text-gray-300 hover:text-white" data-filter="reels">Reels & Redes Sociais</button>
+                <button onclick="filterPortfolio('design')" class="portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 glass-card text-gray-300 hover:text-white" data-filter="design">Design Gráfico</button>
+                <button onclick="filterPortfolio('identidade')" class="portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 glass-card text-gray-300 hover:text-white" data-filter="identidade">Identidade Visual</button>
+                <button onclick="filterPortfolio('casamentos')" class="portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 glass-card text-gray-300 hover:text-white border-pink-500/30 text-pink-400" data-filter="casamentos"><i class="fa-solid fa-heart mr-1.5 text-xs"></i> Casamentos & Emocionais</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div id="portfolio-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Item 1: Audiovisual -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group" data-category="audiovisual">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=600&q=80" alt="Campanha Comercial" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-cyan-500/20 backdrop-blur-md text-cyan-400 text-xs font-semibold">Audiovisual</span>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-dark-900/60 backdrop-blur-xs">
+                            <button onclick="openProjectModal('Campanha Comercial 4K', 'Captação e direção de vídeo institucional para marca de alta tecnologia.', 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=1200&q=80')" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-dark-900 font-bold text-xs shadow-lg">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-400 transition-colors">Campanha Comercial Tech</h3>
+                        <p class="text-xs text-gray-400">Produção completa, captação cinematográfica e finalização 4K.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2: Edição de Vídeos -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group" data-category="edicao">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=600&q=80" alt="Edição Avançada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-blue-500/20 backdrop-blur-md text-blue-400 text-xs font-semibold">Edição de Vídeos</span>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-dark-900/60 backdrop-blur-xs">
+                            <button onclick="openProjectModal('Showreel de Montagem & Ritmo', 'Trabalho focado em transições precisas, sound design imersivo e tratamento de cor.', 'https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=1200&q=80')" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-dark-900 font-bold text-xs shadow-lg">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-400 transition-colors">Showreel de Montagem & Ritmo</h3>
+                        <p class="text-xs text-gray-400">Montagem dinâmica, sound design e finalização com ritmo impecável.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3: Reels & Redes Sociais -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group" data-category="reels">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=600&q=80" alt="Reels Virais" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-purple-500/20 backdrop-blur-md text-purple-400 text-xs font-semibold">Reels & Redes Sociais</span>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-dark-900/60 backdrop-blur-xs">
+                            <button onclick="openProjectModal('Série Reels Dinâmicos', 'Criação e edição de conteúdos verticais focados em engajamento e retenção.', 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1200&q=80')" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-dark-900 font-bold text-xs shadow-lg">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-400 transition-colors">Série Reels & Vídeos Curtos</h3>
+                        <p class="text-xs text-gray-400">Conteúdo vertical de alta retenção para Instagram e TikTok.</p>
+                    </div>
+                </div>
+
+                <!-- Item 4: Design Gráfico -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group" data-category="design">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=600&q=80" alt="Design Gráfico" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-amber-500/20 backdrop-blur-md text-amber-400 text-xs font-semibold">Design Gráfico</span>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-dark-900/60 backdrop-blur-xs">
+                            <button onclick="openProjectModal('Peças Promocionais & Carrosséis', 'Criação visual de carrosséis educativos e posts de alto impacto para marcas.', 'https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=1200&q=80')" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-dark-900 font-bold text-xs shadow-lg">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-400 transition-colors">Carrosséis & Peças Promocionais</h3>
+                        <p class="text-xs text-gray-400">Design visual refinado para feeds corporativos e criadores.</p>
+                    </div>
+                </div>
+
+                <!-- Item 5: Identidade Visual -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group" data-category="identidade">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80" alt="Identidade Visual" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-indigo-500/20 backdrop-blur-md text-indigo-400 text-xs font-semibold">Identidade Visual</span>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-dark-900/60 backdrop-blur-xs">
+                            <button onclick="openProjectModal('Sistema de Identidade Visual', 'Construção completa de marca, paleta de cores, tipografia e diretrizes.', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80')" class="px-5 py-2.5 rounded-xl bg-cyan-500 text-dark-900 font-bold text-xs shadow-lg">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-display font-bold text-lg text-white group-hover:text-cyan-400 transition-colors">Sistema de Identidade Visual</h3>
+                        <p class="text-xs text-gray-400">Branding completo, logotipia e consistência estética.</p>
+                    </div>
+                </div>
+
+                <!-- Item 6: Casamentos & Emocionais -->
+                <div class="portfolio-item glass-card rounded-2xl overflow-hidden group border-pink-500/20" data-category="casamentos">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Casamentos e Emocionais" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/20 to-transparent opacity-80"></div>
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-pink-500/20 backdrop-blur-md text-pink-400 text-xs font-semibold">Casamentos & Emocionais</span>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-dark-900/60 backdrop-blur-xs">
+                            <button onclick="openProjectModal('Filme de Casamento Emocional', 'Registro sensível e cinematográfico de momentos inesquecíveis.', 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80')" class="px-5 py-2.5 rounded-xl bg-pink-500 text-white font-bold text-xs shadow-lg">Ver Detalhes</button>
+                        </div>
+                    </div>
+                    <div class="p-5 space-y-2">
+                        <h3 class="font-display font-bold text-lg text-white group-hover:text-pink-400 transition-colors">Filme de Casamento & Emocionais</h3>
+                        <p class="text-xs text-gray-400">Olhar sensível e autêntico para memórias que duram para sempre.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERACTIVE BEFORE / AFTER COLOR GRADING FEATURE -->
+            <div class="mt-16 glass-panel p-6 sm:p-10 rounded-3xl space-y-6 border-cyan-500/30">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div>
+                        <div class="inline-flex items-center space-x-2 text-cyan-400 text-xs font-semibold uppercase tracking-wider mb-2">
+                            <i class="fa-solid fa-sliders"></i>
+                            <span>Recurso Interativo</span>
+                        </div>
+                        <h3 class="font-display font-bold text-2xl text-white">Montagem de Cor (Antes & Depois)</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 mt-1">Arraste o controle deslizante para ver a transformação do tratamento de cor cinematográfico Astra.</p>
+                    </div>
+                    <div class="px-4 py-2 rounded-xl bg-dark-800 text-xs font-medium text-cyan-300 border border-cyan-500/20">
+                        <i class="fa-solid fa-eye mr-1"></i> Arraste para comparar
+                    </div>
+                </div>
+
+                <!-- Before/After Slider Container -->
+                <div class="img-comp-container shadow-2xl">
+                    <!-- Before Image (Raw / Desaturated) -->
+                    <div class="img-comp-img">
+                        <img src="https://github.com/maracujazin/imagens-astra/blob/main/WhatsApp%20Image%202026-10-22%20at%2011.48.49%20(1).jpeg?raw=true" alt="Antes da Edição de Cor">
+                        <span class="absolute top-4 left-4 px-3 py-1 rounded-lg bg-black/60 backdrop-blur-md text-gray-300 text-xs font-bold uppercase tracking-wider">Cinematic Astra</span>
+                    </div>
+                    <!-- After Image (Graded / Cinematic) -->
+                    <div class="img-comp-img img-comp-overlay" id="comp-overlay" style="width: 50%;">
+                        <img src="https://github.com/maracujazin/imagens-astra/blob/main/WhatsApp%20Image%202026-10-22%20at%2011.48.49.jpeg?raw=true" alt="Depois da Edição de Cor">
+                        <span class="absolute top-4 right-4 px-3 py-1 rounded-lg bg-cyan-500/80 backdrop-blur-md text-dark-900 text-xs font-extrabold uppercase tracking-wider">Original (Bruto)</span>
+                    </div>
+                    <!-- Slider Handle -->
+                    <div class="img-comp-slider" id="comp-slider" style="left: 50%;">
+                        <i class="fa-solid fa-arrows-left-right text-xs"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section id="servicos" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-dark-800/50">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="text-center max-w-3xl mx-auto space-y-4">
+                <span class="text-cyan-400 text-xs font-semibold tracking-widest uppercase">Nossos Serviços</span>
+                <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white">Do roteiro ao último frame</h2>
+                <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                    Atuamos em todas as etapas de comunicação visual com cuidado em cada detalhe e liberdade para adaptar o nosso processo ao seu projeto.
+                </p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 text-2xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-video"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Produção Audiovisual</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            Captação de vídeos para empresas, marcas, eventos e projetos especiais com equipamentos de última geração.
+                        </p>
+                    </div>
+                    <button onclick="openBudgetModalWithService('Produção Audiovisual')" class="w-full py-3 rounded-xl bg-dark-700 hover:bg-cyan-500 hover:text-dark-900 text-cyan-400 font-semibold text-xs tracking-wide transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-500/20 to-indigo-500/20 border border-blue-500/30 flex items-center justify-center text-blue-400 text-2xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-film"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Edição de Vídeos</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            Montagens, cortes, ritmo, transições, tratamento de cor, trilhas sonoras e finalização audiovisual impecável.
+                        </p>
+                    </div>
+                    <button onclick="openBudgetModalWithService('Edição de Vídeos')" class="w-full py-3 rounded-xl bg-dark-700 hover:bg-cyan-500 hover:text-dark-900 text-cyan-400 font-semibold text-xs tracking-wide transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-500/20 to-pink-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 text-2xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-mobile-screen"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Reels & Vídeos Curtos</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            Criação e edição de conteúdos verticais para o Instagram, TikTok e outras redes sociais com foco em conversão.
+                        </p>
+                    </div>
+                    <button onclick="openBudgetModalWithService('Reels e Vídeos Curtos')" class="w-full py-3 rounded-xl bg-dark-700 hover:bg-cyan-500 hover:text-dark-900 text-cyan-400 font-semibold text-xs tracking-wide transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500/20 to-orange-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Design Gráfico</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            Criação de posts, carrosséis, peças promocionais e materiais visuais atraentes para fortalecer sua marca.
+                        </p>
+                    </div>
+                    <button onclick="openBudgetModalWithService('Design Gráfico')" class="w-full py-3 rounded-xl bg-dark-700 hover:bg-cyan-500 hover:text-dark-900 text-cyan-400 font-semibold text-xs tracking-wide transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-teal-500/20 to-cyan-500/20 border border-teal-500/30 flex items-center justify-center text-teal-400 text-2xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-share-nodes"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Social Media</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            Planejamento e criação de conteúdo, organização de publicações e apoio completo à gestão de presença digital.
+                        </p>
+                    </div>
+                    <button onclick="openBudgetModalWithService('Social Media')" class="w-full py-3 rounded-xl bg-dark-700 hover:bg-cyan-500 hover:text-dark-900 text-cyan-400 font-semibold text-xs tracking-wide transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="glass-card p-8 rounded-2xl flex flex-col justify-between space-y-6 group">
+                    <div class="space-y-4">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-500/20 to-purple-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400 text-2xl group-hover:scale-110 transition-transform duration-300">
+                            <i class="fa-solid fa-cubes"></i>
+                        </div>
+                        <h3 class="font-display font-bold text-xl text-white">Projetos Personalizados</h3>
+                        <p class="text-xs sm:text-sm text-gray-400 leading-relaxed">
+                            Soluções criativas sob medida, adaptadas exatamente à necessidade e ao objetivo de cada cliente.
+                        </p>
+                    </div>
+                    <button onclick="openBudgetModalWithService('Projetos Personalizados')" class="w-full py-3 rounded-xl bg-dark-700 hover:bg-cyan-500 hover:text-dark-900 text-cyan-400 font-semibold text-xs tracking-wide transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span>Solicitar Orçamento</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre (Nossa História) -->
+    <section id="sobre" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Left Image Stack -->
+            <div class="lg:col-span-6 relative">
+                <div class="relative grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="glass-card p-2 rounded-2xl overflow-hidden h-64">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=600&q=80" alt="Equipe Astra" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                        <div class="glass-panel p-6 rounded-2xl bg-cyan-500/10 border-cyan-500/20 text-center">
+                            <div class="font-display font-extrabold text-3xl text-cyan-400">Astra Studio</div>
+                            <div class="text-xs text-gray-300 mt-1">Criatividade sem Fronteiras</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="glass-panel p-6 rounded-2xl bg-purple-500/10 border-purple-500/20 text-center">
+                            <div class="font-display font-extrabold text-3xl text-purple-400">Amizade</div>
+                            <div class="text-xs text-gray-300 mt-1">A Base de Tudo</div>
+                        </div>
+                        <div class="glass-card p-2 rounded-2xl overflow-hidden h-64">
+                            <img src="https://images.unsplash.com/photo-1542744094-3a31243324d0?auto=format&fit=crop&w=600&q=80" alt="Processo Criativo" class="w-full h-full object-cover rounded-xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="lg:col-span-6 space-y-6">
+                <div class="inline-flex items-center space-x-2 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Nossa História</span>
+                </div>
+                
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">Uma agência nascida da amizade</h2>
+
+                <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed">
+                    <p>
+                        A <strong class="text-white font-semibold">Astra Visual Studio</strong> nasceu da união de amigos que compartilhavam a paixão pela produção audiovisual, edição de vídeos e criação de conteúdo. Tudo começou com um videomaker trabalhando de forma independente.
+                    </p>
+                    <p>
+                        Com o tempo, surgiu a ideia de reunir amigos com habilidades complementares para construir uma agência criativa. Hoje somos uma equipe que valoriza a amizade, a colaboração, a troca de ideias e a liberdade criativa.
+                    </p>
+                    <p>
+                        Acreditamos que trabalhar em conjunto nos permite explorar diferentes perspectivas e desenvolver projetos com dedicação e personalidade. Estamos construindo nossa trajetória abertos a diferentes segmentos e interessados em transformar ideias em conteúdos visuais marcantes.
+                    </p>
+                </div>
+
+                <!-- Mission Card -->
+                <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-cyan-400 space-y-2 mt-6">
+                    <h4 class="font-display font-bold text-base text-white flex items-center space-x-2">
+                        <i class="fa-solid fa-bullseye text-cyan-400"></i>
+                        <span>Nossa Missão</span>
+                    </h4>
+                    <p class="text-xs sm:text-sm text-gray-300">
+                        Ajudar marcas, empresas e pessoas a expressarem suas ideias por meio de vídeos, design e comunicação audiovisual.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram & Bastidores -->
+    <section id="instagram" class="py-24 px-4 sm:px-6 lg:px-8 relative bg-dark-800/30">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-6">
+                <div class="space-y-2">
+                    <span class="text-cyan-400 text-xs font-semibold tracking-widest uppercase">Redes Sociais</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">Bastidores & Novidades</h2>
+                    <p class="text-gray-400 text-sm sm:text-base">Acompanhe nossos trabalhos, processos e conteúdos no Instagram.</p>
+                </div>
+                <a href="https://www.instagram.com/astra_visualstudio/" target="_blank" class="px-6 py-3 rounded-xl bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-semibold text-xs flex items-center space-x-2 shadow-lg hover:scale-105 transition-transform">
+                    <i class="fa-brands fa-instagram text-base"></i>
+                    <span>Seguir @astra_visualstudio</span>
+                </a>
+            </div>
+
+            <!-- Instagram Feed Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Post 1 -->
+                <a href="https://www.instagram.com/astra_visualstudio/" target="_blank" class="glass-card rounded-2xl overflow-hidden group relative aspect-square">
+                    <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=500&q=80" alt="Instagram Post 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-dark-900/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center space-y-2">
+                        <i class="fa-brands fa-instagram text-2xl text-pink-400"></i>
+                        <span class="text-xs text-white font-medium">Bastidores de Gravação 4K</span>
+                        <div class="flex items-center space-x-3 text-xs text-gray-300">
+                            <span><i class="fa-solid fa-heart text-pink-400 mr-1"></i> 248</span>
+                            <span><i class="fa-solid fa-comment text-cyan-400 mr-1"></i> 14</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Post 2 -->
+                <a href="https://www.instagram.com/astra_visualstudio/" target="_blank" class="glass-card rounded-2xl overflow-hidden group relative aspect-square">
+                    <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=500&q=80" alt="Instagram Post 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-dark-900/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center space-y-2">
+                        <i class="fa-brands fa-instagram text-2xl text-pink-400"></i>
+                        <span class="text-xs text-white font-medium">Color Grading na prática</span>
+                        <div class="flex items-center space-x-3 text-xs text-gray-300">
+                            <span><i class="fa-solid fa-heart text-pink-400 mr-1"></i> 312</span>
+                            <span><i class="fa-solid fa-comment text-cyan-400 mr-1"></i> 22</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Post 3 -->
+                <a href="https://www.instagram.com/astra_visualstudio/" target="_blank" class="glass-card rounded-2xl overflow-hidden group relative aspect-square">
+                    <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=500&q=80" alt="Instagram Post 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-dark-900/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center space-y-2">
+                        <i class="fa-brands fa-instagram text-2xl text-pink-400"></i>
+                        <span class="text-xs text-white font-medium">Design & Identidade Visual</span>
+                        <div class="flex items-center space-x-3 text-xs text-gray-300">
+                            <span><i class="fa-solid fa-heart text-pink-400 mr-1"></i> 189</span>
+                            <span><i class="fa-solid fa-comment text-cyan-400 mr-1"></i> 8</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Post 4 -->
+                <a href="https://www.instagram.com/astra_visualstudio/" target="_blank" class="glass-card rounded-2xl overflow-hidden group relative aspect-square">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=500&q=80" alt="Instagram Post 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-dark-900/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-4 text-center space-y-2">
+                        <i class="fa-brands fa-instagram text-2xl text-pink-400"></i>
+                        <span class="text-xs text-white font-medium">Casamento & Emoção</span>
+                        <div class="flex items-center space-x-3 text-xs text-gray-300">
+                            <span><i class="fa-solid fa-heart text-pink-400 mr-1"></i> 450</span>
+                            <span><i class="fa-solid fa-comment text-cyan-400 mr-1"></i> 30</span>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato & Orçamento -->
+    <section id="contato" class="py-24 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <!-- Left Info -->
+            <div class="lg:col-span-5 space-y-8">
+                <div class="space-y-4">
+                    <span class="text-cyan-400 text-xs font-semibold tracking-widest uppercase">Vamos conversar</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">Vamos transformar sua ideia em realidade?</h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        Conte um pouco sobre o seu projeto. Ao enviar sua mensagem, o canal é aberto para envio direto já preenchida, sem cadastro e sem custo.
+                    </p>
+                </div>
+
+                <!-- Channels -->
+                <div class="space-y-4">
+                    <a href="https://wa.me/qr/WBCGERPXN6ODB1" target="_blank" class="glass-card p-4 rounded-2xl flex items-center space-x-4 hover:border-green-500/40 transition-colors group">
+                        <div class="w-12 h-12 rounded-xl bg-green-500/10 text-green-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-400">WhatsApp</div>
+                            <div class="text-sm font-bold text-white">Disponível em breve / Direto</div>
+                        </div>
+                    </a>
+
+                    <a href="https://www.instagram.com/astra_visualstudio/" target="_blank" class="glass-card p-4 rounded-2xl flex items-center space-x-4 hover:border-pink-500/40 transition-colors group">
+                        <div class="w-12 h-12 rounded-xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-xl group-hover:scale-110 transition-transform">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-400">Instagram</div>
+                            <div class="text-sm font-bold text-white">@astra_visualstudio</div>
+                        </div>
+                    </a>
+
+                    <div class="glass-card p-4 rounded-2xl flex items-center space-x-4">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs text-gray-400">E-mail</div>
+                            <div class="text-sm font-bold text-white">astrastudiomarketing@gmail.com </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Form -->
+            <div class="lg:col-span-7">
+                <div class="glass-panel p-8 sm:p-10 rounded-3xl shadow-2xl relative">
+                    <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">Seu Nome / Empresa</label>
+                                <input type="text" id="form-name" required class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 transition-colors" placeholder="Ex: Maria Silva">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">WhatsApp ou E-mail</label>
+                                <input type="text" id="form-contact" required class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 transition-colors" placeholder="(00) 00000-0000">
+                            </div>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">Serviço Desejado</label>
+                            <select id="form-service" class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-500 transition-colors">
+                                <option value="Produção Audiovisual">Produção Audiovisual</option>
+                                <option value="Edição de Vídeos">Edição de Vídeos</option>
+                                <option value="Reels e Vídeos Curtos">Reels e Vídeos Curtos</option>
+                                <option value="Design Gráfico">Design Gráfico</option>
+                                <option value="Social Media">Social Media</option>
+                                <option value="Projetos Personalizados">Projetos Personalizados</option>
+                                <option value="Casamentos & Emocionais">Casamentos & Emocionais</option>
+                            </select>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label class="text-xs font-semibold text-gray-300 uppercase tracking-wider">Detalhes do Projeto</label>
+                            <textarea id="form-message" rows="4" required class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-cyan-500 transition-colors resize-none" placeholder="Conte sobre sua ideia, prazos e expectativas..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm shadow-xl shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-[1.01] transition-all duration-300 flex items-center justify-center space-x-2">
+                            <span>Enviar Solicitação de Orçamento</span>
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8 bg-dark-900">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-dark-600 flex items-center justify-center text-white text-sm font-bold border border-cyan-500/30 p-1">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <path d="M50 12 L88 84 H68 L50 48 L32 84 H12 Z" fill="#00AA86"/>
+                        <path d="M50 32 L54 46 L68 50 L54 54 L50 68 L46 54 L32 50 L46 46 Z" fill="#FFCF7C"/>
+                    </svg>
+                </div>
+                <span class="font-display font-bold text-white text-lg">Astra Visual Studio</span>
+            </div>
+            <p class="text-xs text-gray-400">
+                &copy; 2026 Astra Visual Studio. Todos os direitos reservados. Criado com paixão e amizade.
+            </p>
+            <div class="flex items-center space-x-4">
+                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-cyan-400 transition-colors">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/qr/WBCGERPXN6ODB1" target="_blank" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-cyan-400 transition-colors">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+                <a href="mailto:astrastudiomarketing@gmail.com" class="w-9 h-9 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-cyan-400 transition-colors">
+                    <i class="fa-solid fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BUDGET MODAL -->
+    <div id="budget-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark-900/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-lg w-full p-8 rounded-3xl relative shadow-2xl border-cyan-500/30 animate-scale-up">
+            <button onclick="closeBudgetModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            
+            <div class="space-y-6">
+                <div>
+                    <span class="text-cyan-400 text-xs font-semibold uppercase tracking-wider">Orçamento Rápido</span>
+                    <h3 class="font-display font-extrabold text-2xl text-white mt-1">Solicitar Orçamento</h3>
+                    <p class="text-xs text-gray-400 mt-1">Preencha os dados abaixo e entraremos em contato prontamente.</p>
+                </div>
+
+                <form onsubmit="handleModalSubmit(event)" class="space-y-4">
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-gray-300 uppercase">Seu Nome</label>
+                        <input type="text" id="modal-name" required class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-500" placeholder="Nome Completo">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-gray-300 uppercase">WhatsApp ou E-mail</label>
+                        <input type="text" id="modal-contact" required class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-500" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-gray-300 uppercase">Serviço</label>
+                        <select id="modal-service" class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-500">
+                            <option value="Produção Audiovisual">Produção Audiovisual</option>
+                            <option value="Edição de Vídeos">Edição de Vídeos</option>
+                            <option value="Reels e Vídeos Curtos">Reels e Vídeos Curtos</option>
+                            <option value="Design Gráfico">Design Gráfico</option>
+                            <option value="Social Media">Social Media</option>
+                            <option value="Projetos Personalizados">Projetos Personalizados</option>
+                            <option value="Casamentos & Emocionais">Casamentos & Emocionais</option>
+                        </select>
+                    </div>
+                    <div class="space-y-1">
+                        <label class="text-xs font-semibold text-gray-300 uppercase">Resumo do Projeto</label>
+                        <textarea id="modal-message" rows="3" required class="w-full px-4 py-3 rounded-xl bg-dark-800 border border-white/10 text-white text-sm focus:outline-none focus:border-cyan-500 resize-none" placeholder="Conte brevemente sobre o que precisa..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 hover:scale-[1.01] transition-all">
+                        Enviar Solicitação
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- PROJECT DETAILS MODAL -->
+    <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark-900/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-2xl w-full p-8 rounded-3xl relative shadow-2xl border-cyan-500/30 space-y-6">
+            <button onclick="closeProjectModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="project-modal-content" class="space-y-4">
+                <!-- Dynamic Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Toast Notification System
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').innerText = title;
+            document.getElementById('toast-msg').innerText = message;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
+
+        // Budget Modal Controls
+        function openBudgetModal() {
+            document.getElementById('budget-modal').classList.remove('hidden');
+        }
+        function closeBudgetModal() {
+            document.getElementById('budget-modal').classList.add('hidden');
+        }
+        function openBudgetModalWithService(serviceName) {
+            document.getElementById('modal-service').value = serviceName;
+            openBudgetModal();
+        }
+
+        // Project Modal Controls
+        function openProjectModal(title, desc, imgSrc) {
+            const content = document.getElementById('project-modal-content');
+            content.innerHTML = `
+                <div class="rounded-xl overflow-hidden h-64 sm:h-72">
+                    <img src="${imgSrc}" alt="${title}" class="w-full h-full object-cover">
+                </div>
+                <div class="space-y-2">
+                    <span class="px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-400 text-xs font-semibold">Projeto Selecionado</span>
+                    <h3 class="font-display font-bold text-2xl text-white">${title}</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">${desc}</p>
+                </div>
+                <div class="pt-4 flex gap-4">
+                    <button onclick="closeProjectModal(); openBudgetModal();" class="flex-1 py-3 rounded-xl bg-cyan-500 text-dark-900 font-bold text-xs shadow-lg">Solicitar Projeto Semelhante</button>
+                    <button onclick="closeProjectModal()" class="px-6 py-3 rounded-xl glass-card text-gray-300 font-semibold text-xs">Fechar</button>
+                </div>
+            `;
+            document.getElementById('project-modal').classList.remove('hidden');
+        }
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+        }
+
+        // Portfolio Filtering
+        function filterPortfolio(category) {
+            const buttons = document.querySelectorAll('.portfolio-btn');
+            buttons.forEach(btn => {
+                if(btn.getAttribute('data-filter') === category) {
+                    btn.className = "portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 bg-cyan-500 text-dark-900 font-semibold shadow-lg shadow-cyan-500/20";
+                } else {
+                    btn.className = "portfolio-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-medium transition-all duration-300 glass-card text-gray-300 hover:text-white";
+                }
+            });
+
+            const items = document.querySelectorAll('.portfolio-item');
+            items.forEach(item => {
+                if(category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Form Submissions
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            showToast('Mensagem Enviada!', 'Entraremos em contato em breve através dos canais informados.');
+            document.getElementById('contact-form').reset();
+        }
+
+        function handleModalSubmit(e) {
+            e.preventDefault();
+            closeBudgetModal();
+            showToast('Orçamento Solicitado!', 'Sua solicitação foi enviada com sucesso para a equipe Astra.');
+        }
+
+        // Before / After Color Grading Slider Logic
+        function initComparisons() {
+            const slider = document.getElementById('comp-slider');
+            const overlay = document.getElementById('comp-overlay');
+            const container = overlay.parentElement;
+            let clicked = 0;
+
+            function slideReady(e) {
+                e.preventDefault();
+                clicked = 1;
+                window.addEventListener('mousemove', slideMove);
+                window.addEventListener('touchmove', slideMove);
+                window.addEventListener('mouseup', slideFinish);
+                window.addEventListener('touchend', slideFinish);
+            }
+
+            function slideFinish() {
+                clicked = 0;
+            }
+
+            function slideMove(e) {
+                if (clicked == 0) return;
+                let pos = getCursorPos(e);
+                if (pos < 0) pos = 0;
+                if (pos > container.offsetWidth) pos = container.offsetWidth;
+                slide(pos);
+            }
+
+            function getCursorPos(e) {
+                let a = container.getBoundingClientRect();
+                let x = (e.pageX ? e.pageX : e.touches[0].pageX) - a.left;
+                return x - window.pageXOffset;
+            }
+
+            function slide(x) {
+                overlay.style.width = x + "px";
+                slider.style.left = x + "px";
+            }
+
+            slider.addEventListener('mousedown', slideReady);
+            slider.addEventListener('touchstart', slideReady);
+
+            // Set initial position at 50%
+            setTimeout(() => {
+                slide(container.offsetWidth / 2);
+            }, 100);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initComparisons();
+        });
+    </script>
+</body>
+</html>
