@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Astra Visual Studio | Produção Audiovisual & Design Criativo</title>
     <!-- Favicon da Astra Studio -->
-    <link rel="icon" type="https://github.com/astravisualstudio/astra-visual-studio/blob/main/favicon.png?raw=true">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/astravisualstudio/astra-visual-studio/main/png%20v2.png">
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -272,7 +272,7 @@
                 </div>
             </div>
 
-            <!-- Right Visual Montage Card -->
+            <!-- Right Visual Montage Card with Auto Video Loop -->
             <div class="lg:col-span-5 relative">
                 <div class="relative mx-auto max-w-md lg:max-w-none">
                     <!-- Glow behind card -->
@@ -280,13 +280,21 @@
                     
                     <div class="relative glass-panel p-4 rounded-2xl shadow-2xl space-y-4">
                         <div class="relative h-72 sm:h-80 rounded-xl overflow-hidden group">
-                            <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="Produção Audiovisual" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-dark-900/20 to-transparent flex flex-col justify-end p-6">
+                            <!-- VÍDEO EM LOOP AUTOMÁTICO NA HOME -->
+                            <video autoplay muted loop playsinline class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <source src="https://github.com/astravisualstudio/astra-visual-studio/raw/refs/heads/main/1023(2).mov" type="video/quicktime">
+                                <source src="https://github.com/astravisualstudio/astra-visual-studio/raw/refs/heads/main/1023(2).mov" type="video/mp4">
+                                Seu navegador não suporta vídeos HTML5.
+                            </video>
+
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark-900/90 via-dark-900/20 to-transparent flex flex-col justify-end p-6 pointer-events-none">
                                 <span class="px-2.5 py-1 rounded-md bg-cyan-500/20 text-cyan-400 text-xs font-semibold w-max mb-2">Showreel 2026</span>
                                 <h3 class="font-display font-bold text-xl text-white">Astra Visual Studio em Ação</h3>
                                 <p class="text-xs text-gray-300 mt-1">Captação, direção e tratamento de cor premium.</p>
                             </div>
-                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-dark-900/70 backdrop-blur-md flex items-center justify-center text-cyan-400 cursor-pointer hover:bg-cyan-500 hover:text-dark-900 transition-colors" onclick="openVideoModal('Showreel Principal')">
+
+                            <!-- Botão de Play Interativo para abrir o Showreel em tela maior -->
+                            <div class="absolute top-4 right-4 w-10 h-10 rounded-full bg-dark-900/70 backdrop-blur-md flex items-center justify-center text-cyan-400 cursor-pointer hover:bg-cyan-500 hover:text-dark-900 transition-colors shadow-lg" onclick="openShowreelModal('https://github.com/astravisualstudio/astra-visual-studio/raw/refs/heads/main/1023(2).mov')">
                                 <i class="fa-solid fa-play text-sm ml-0.5"></i>
                             </div>
                         </div>
@@ -886,6 +894,26 @@
         </div>
     </div>
 
+    <!-- SHOWREEL / VIDEO MODAL (Abre ao clicar no botão de play) -->
+    <div id="showreel-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark-900/90 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-4xl w-full p-4 sm:p-6 rounded-3xl relative shadow-2xl border-cyan-500/30 space-y-4">
+            <button onclick="closeShowreelModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-dark-900/80 text-gray-300 hover:text-white flex items-center justify-center text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="rounded-2xl overflow-hidden aspect-video bg-black flex items-center justify-center">
+                <video id="modal-video-player" controls class="w-full h-full object-contain">
+                    <source src="" type="video/quicktime">
+                    <source src="" type="video/mp4">
+                    Seu navegador não suporta vídeos HTML5.
+                </video>
+            </div>
+            <div class="text-center">
+                <h3 class="font-display font-bold text-xl text-white">Astra Visual Studio - Showreel Completo</h3>
+                <p class="text-xs text-gray-400 mt-1">Captação, direção e finalização cinematográfica.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- PROJECT DETAILS MODAL -->
     <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark-900/80 backdrop-blur-md hidden">
         <div class="glass-panel max-w-2xl w-full p-8 rounded-3xl relative shadow-2xl border-cyan-500/30 space-y-6">
@@ -927,6 +955,22 @@
         function openBudgetModalWithService(serviceName) {
             document.getElementById('modal-service').value = serviceName;
             openBudgetModal();
+        }
+
+        // Showreel Modal Controls (Botão de Play do Hero)
+        function openShowreelModal(videoSrc) {
+            const modal = document.getElementById('showreel-modal');
+            const player = document.getElementById('modal-video-player');
+            player.src = videoSrc;
+            modal.classList.remove('hidden');
+            player.play();
+        }
+        function closeShowreelModal() {
+            const modal = document.getElementById('showreel-modal');
+            const player = document.getElementById('modal-video-player');
+            player.pause();
+            player.currentTime = 0;
+            modal.classList.add('hidden');
         }
 
         // Project Modal Controls
